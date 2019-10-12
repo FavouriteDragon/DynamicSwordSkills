@@ -20,14 +20,13 @@ compileJava {
 
 dependencies {
     compile files (
-		"eclipse/libs/1.12.2-SwordSkillsApi-1.1.0-deobf.jar",
+		//"eclipse/libs/1.12.2-SwordSkillsApi-1.1.0-deobf.jar",
     )
 }
 
 minecraft {
-    version = "1.12.2-14.23.0.2529"
-    runDir = "eclipse"
-    mappings = "snapshot_20171102"
+    version = "1.12.2-14.23.5.2838"
+    mappings = "stable_39"
 }
 
 processResources

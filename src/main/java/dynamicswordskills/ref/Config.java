@@ -17,11 +17,6 @@
 
 package dynamicswordskills.ref;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
 import dynamicswordskills.DynamicSwordSkills;
 import dynamicswordskills.client.gui.IGuiOverlay.HALIGN;
 import dynamicswordskills.client.gui.IGuiOverlay.VALIGN;
@@ -31,6 +26,11 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import swordskillsapi.api.item.WeaponRegistry;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Config
 {
@@ -65,6 +65,8 @@ public class Config
 	private static boolean autoTarget;
 	/** [Targeting] Whether players can be targeted (toggle in game by pressing '.' while sneaking) */
 	private static boolean enablePlayerTarget;
+	/** [GUI] Whether to display the skill gui. Shouldn't really be disabled unless modpacks provide their own skill gui's for it. */
+	private static boolean enableSkillGUI;
 	/*================== WEAPON REGISTRY =====================*/
 	/** Items that are considered Swords for all intents and purposes */
 	private static String[] swords = new String[0];
@@ -134,6 +136,7 @@ public class Config
 		endingBlowHudOffsetY = config.get(category, "[Ending Blow HUD][Offset: Y] Moves the HUD element up (-) or down (+) this number of pixels", 30).getInt();
 		autoTarget = config.get(category, "[Targeting] Whether auto-targeting is enabled or not (toggle in game: '.')", true).getBoolean(true);
 		enablePlayerTarget = config.get(category, "[Targeting] Whether players can be targeted (toggle in game: '.' while sneaking)", true).getBoolean(true);
+		enableSkillGUI = config.get(category, "[GUI] Whether the skill gui is enabled (press 'P' by default to open it).", true).getBoolean(true);
 		/*================== WEAPON REGISTRY =====================*/
 		swords = config.get("Weapon Registry", "[Allowed Swords] Enter items as modid:registered_item_name, each on a separate line between the '<' and '>'", new String[0], "Register an item so that it is considered a SWORD by ZSS, i.e. it be used with skills that\nrequire swords, as well as other interactions that require swords, such as cutting grass.\nAll swords are also considered WEAPONS.").getStringList();
 		Arrays.sort(swords);
@@ -194,6 +197,9 @@ public class Config
 	public static boolean toggleAutoTarget() { autoTarget = !autoTarget; return autoTarget; }
 	public static boolean canTargetPlayers() { return enablePlayerTarget; }
 	public static boolean toggleTargetPlayers() { enablePlayerTarget = !enablePlayerTarget; return enablePlayerTarget; }
+	public static boolean displaySkillGUI() {
+		return enableSkillGUI;
+	}
 	/*================== SKILLS =====================*/
 	public static boolean giveBonusOrb() { return enableBonusOrb; }
 	public static int getLootWeight() { return chestLootWeight; }
